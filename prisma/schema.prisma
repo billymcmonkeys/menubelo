@@ -1,0 +1,94 @@
+// Menubelo — Prisma Schema
+// DB: SQLite (local-first, single user)
+// Migration path: change provider to "postgresql" when multi-user is needed
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Recipe {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  servings    Int      @default(2)
+  prepTimeMin Int?
+  cookTimeMin Int?
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  ingredients RecipeIngredient[]
+  weekEntries WeekPlanEntry[]
+}
+
+model Ingredient {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  category  String?
+  createdAt DateTime @default(now())
+
+  recipeIngredients RecipeIngredient[]
+  groceryItems      GroceryListItem[]
+}
+
+model RecipeIngredient {
+  id           Int    @id @default(autoincrement())
+  quantity     Float
+  unit         String
+  notes        String?
+
+  recipeId     Int
+  ingredientId Int
+
+  recipe     Recipe     @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@unique([recipeId, ingredientId])
+}
+
+model WeekPlan {
+  id        Int      @id @default(autoincrement())
+  name      String
+  startDate DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  entries      WeekPlanEntry[]
+  groceryItems GroceryListItem[]
+}
+
+model WeekPlanEntry {
+  id         Int    @id @default(autoincrement())
+  dayOfWeek  Int    // 0 = Lunes … 6 = Domingo
+  mealSlot   String // "desayuno" | "almuerzo" | "merienda" | "cena"
+  servings   Int    @default(2)
+
+  weekPlanId Int
+  recipeId   Int
+
+  weekPlan WeekPlan @relation(fields: [weekPlanId], references: [id], onDelete: Cascade)
+  recipe   Recipe   @relation(fields: [recipeId], references: [id])
+
+  @@unique([weekPlanId, dayOfWeek, mealSlot])
+}
+
+model GroceryListItem {
+  id            Int     @id @default(autoincrement())
+  totalQuantity Float
+  unit          String
+  checked       Boolean @default(false)
+  createdAt     DateTime @default(now())
+
+  weekPlanId   Int
+  ingredientId Int
+
+  weekPlan   WeekPlan   @relation(fields: [weekPlanId], references: [id], onDelete: Cascade)
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@unique([weekPlanId, ingredientId])
+}
