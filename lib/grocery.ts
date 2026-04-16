@@ -18,13 +18,20 @@ export async function generateGroceryList(weekPlanId: number) {
     },
   });
 
-  // Aggregate: { ingredientId -> { totalQuantity, unit, ingredient } }
+  // Aggregate: { ingredientId -> { totalQuantity, unit, ingredientId } }
+  // Note: GroceryListItem is unique by (weekPlanId, ingredientId), so if the
+  // same ingredient appears with different units across recipes, the first
+  // unit wins and quantities are summed. This is a known limitation — mixing
+  // units for the same ingredient (e.g. "100g butter" + "1 tbsp butter")
+  // produces an inaccurate total. Document this to users via UI if needed.
   const aggregated = new Map<
     number,
     { totalQuantity: number; unit: string; ingredientId: number }
   >();
 
   for (const entry of entries) {
+    // Guard against recipes with servings = 0 (would produce Infinity scale)
+    if (!entry.recipe.servings || entry.recipe.servings <= 0) continue;
     const scale = entry.servings / entry.recipe.servings;
     for (const ri of entry.recipe.ingredients) {
       const existing = aggregated.get(ri.ingredientId);
