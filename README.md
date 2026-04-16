@@ -12,7 +12,7 @@
 [![Prisma](https://img.shields.io/badge/Prisma-5-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[Live Demo](#) • [Report Bug](https://github.com/yourusername/menubelo/issues) • [Request Feature](https://github.com/yourusername/menubelo/issues)
+[Live Demo](https://github.com/billymcmonkeys/menubelo) • [Report Bug](https://github.com/billymcmonkeys/menubelo/issues) • [Request Feature](https://github.com/billymcmonkeys/menubelo/issues)
 
 </div>
 
@@ -80,7 +80,7 @@ Follow these steps to get Menubelo running on your local machine:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/menubelo.git
+git clone https://github.com/billymcmonkeys/menubelo.git
 cd menubelo
 ```
 
@@ -469,9 +469,9 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ### Need Help?
 
-- 🐛 [Report a Bug](https://github.com/yourusername/menubelo/issues)
-- 💡 [Request a Feature](https://github.com/yourusername/menubelo/issues)
-- 💬 [Ask a Question](https://github.com/yourusername/menubelo/discussions)
+- 🐛 [Report a Bug](https://github.com/billymcmonkeys/menubelo/issues)
+- 💡 [Request a Feature](https://github.com/billymcmonkeys/menubelo/issues)
+- 💬 [Ask a Question](https://github.com/billymcmonkeys/menubelo/discussions)
 
 ---
 
@@ -493,7 +493,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ### 🍽️ Simplify your weekly cooking! 🍽️
 
-**[Visit MC Monkeys](https://mcmonkeys.up.railway.app/)** | **[Star this repo ⭐](https://github.com/yourusername/menubelo)**
+**[Visit MC Monkeys](https://mcmonkeys.up.railway.app/)** | **[Star this repo ⭐](https://github.com/billymcmonkeys/menubelo)**
 
 Built with human-AI collaboration by [MC Monkeys](https://mcmonkeys.up.railway.app/) 🐵
 
